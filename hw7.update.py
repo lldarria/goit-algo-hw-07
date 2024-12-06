@@ -70,6 +70,9 @@ class Record:
     def __str__(self):
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
     
+    def add_birthday(self, birthday):
+        self.birthday = Birthday(birthday)
+    
     def days_to_birthday(self):
         if not self.birthday:
             return None
@@ -120,7 +123,17 @@ if __name__ == "__main__":
     jane_record = Record("Jane")
     jane_record.add_phone("9876543210")
     book.add_record(jane_record)
- 
+
+    ann_record = Record ("Ann")
+    ann_record.add_phone("9876543217")
+    ann_record.add_birthday("07.12.2001")
+    book.add_record(ann_record)
+
+    vova_record = Record ("Vova")
+    vova_record.add_phone("1234567899")
+    vova_record.add_birthday("15.12.2000")
+    book.add_record(vova_record)
+
     print(book)
 
     john = book.find("John")
@@ -142,4 +155,4 @@ book.add_record(Record(Name("Anna"), Phone("9876543217"), Birthday("07.12.2001")
 # Отримання іменинників
 upcoming = book.upcoming_birthdays()
 for rec in upcoming:
-    print(f"{rec.name.value}: {rec.birthday.value}")
+    print(f"Іменниники у найближчі сім днів: {rec.name.value}: {rec.birthday.value}")
